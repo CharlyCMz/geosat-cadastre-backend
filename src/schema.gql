@@ -1,0 +1,15 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type LegalPerson {
+  address: String!
+  comercialValue: Int!
+  eMail: String!
+  nit: Int!
+  businessName: String!
+}
+
+type Query {
+  legalPersons: [LegalPerson!]!
+}

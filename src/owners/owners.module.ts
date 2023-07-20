@@ -5,6 +5,11 @@ import { NaturalPersonResolver } from './resolvers/natural-person.resolver';
 import { LegalPersonResolver } from './resolvers/legal-person.resolver';
 
 @Module({
-  providers: [NaturalPersonService, LegalPersonService, NaturalPersonResolver, LegalPersonResolver]
+  providers: [
+    NaturalPersonService,
+    LegalPersonService,
+    NaturalPersonResolver,
+    LegalPersonResolver,
+  ],
 })
 export class OwnersModule {}
