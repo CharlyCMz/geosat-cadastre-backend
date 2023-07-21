@@ -6,6 +6,7 @@ import { PropertiesModule } from './properties/properties.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { join } from 'path';
     }),
     OwnersModule,
     PropertiesModule,
+    DatabaseModule,
   ],
   controllers: [AppController],
   providers: [AppService],
