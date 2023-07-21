@@ -1,10 +1,19 @@
 import { ObjectType, Field, Float } from '@nestjs/graphql';
 import { IsBoolean, IsNumber, IsPositive, IsString } from 'class-validator';
-import { Column, CreateDateColumn, Entity, UpdateDateColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @ObjectType()
 @Entity({ name: 'lands' })
 export class Land {
+  @PrimaryGeneratedColumn()
+  id: number;
+
   @Field((type) => Float)
   @IsNumber()
   @IsPositive()

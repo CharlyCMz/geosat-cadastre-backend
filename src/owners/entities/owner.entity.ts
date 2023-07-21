@@ -1,5 +1,4 @@
 import { ObjectType, Field } from '@nestjs/graphql';
-import { IsEmail, IsString } from 'class-validator';
 import {
   BaseEntity,
   Column,
@@ -16,12 +15,10 @@ export abstract class Owner extends BaseEntity {
   id: number;
 
   @Field()
-  @IsString()
   @Column({ type: 'varchar', length: 255 })
   address: string;
 
   @Field()
-  @IsEmail()
   @Column({ name: 'e_mail', type: 'varchar', length: 64 })
   eMail: string;
 

@@ -4,14 +4,18 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  PrimaryGeneratedColumn,
   Unique,
   UpdateDateColumn,
 } from 'typeorm';
 
 @ObjectType()
 @Entity({ name: 'properties' })
-@Unique(['predial_number'])
+@Unique(['predialNumber'])
 export class Property {
+  @PrimaryGeneratedColumn()
+  id: number;
+
   @Field((type) => Int)
   @IsNumber()
   @IsPositive()

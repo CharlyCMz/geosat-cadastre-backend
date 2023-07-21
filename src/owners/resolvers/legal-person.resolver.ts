@@ -8,6 +8,6 @@ export class LegalPersonResolver {
 
   @Query(() => [LegalPerson])
   legalPersons() {
-    return this.legalPersonService.findOne();
+    return this.legalPersonService.findAll();
   }
 }
