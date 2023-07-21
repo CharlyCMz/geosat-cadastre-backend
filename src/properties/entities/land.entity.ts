@@ -15,18 +15,14 @@ export class Land {
   id: number;
 
   @Field((type) => Float)
-  @IsNumber()
-  @IsPositive()
   @Column({ type: 'bigint' })
   area: number;
 
-  @Field()
-  @IsString()
+  @Field((type) => Float)
   @Column({ name: 'comercial_value', type: 'money' })
-  comercialValue: string;
+  comercialValue: number;
 
   @Field()
-  @IsBoolean()
   @Column({ type: 'boolean' })
   waterBodies: boolean;
 

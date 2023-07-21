@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { LegalPerson } from '../entities/legal-person.entity';
 import { Repository } from 'typeorm';
@@ -13,6 +13,17 @@ export class LegalPersonService {
 
   async findAll() {
     return await this.legalPersonRepository.find();
+  }
+
+  async findOneById(id: number): Promise<LegalPerson> {
+    const owner = await this.legalPersonRepository
+      .createQueryBuilder('legal_people')
+      .where('legal_people.id = :id', { id })
+      .getOne();
+    if (!owner) {
+      throw new NotFoundException(`The Owner with ID: ${id} was Not Found`);
+    }
+    return owner;
   }
 
   async createEntity(owner: CreateLegalPersonDTO): Promise<LegalPerson> {

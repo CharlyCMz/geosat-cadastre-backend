@@ -1,5 +1,4 @@
 import { ObjectType, Field, Float, Int } from '@nestjs/graphql';
-import { IsNumber, IsPositive, IsString } from 'class-validator';
 import {
   Column,
   CreateDateColumn,
@@ -11,28 +10,23 @@ import {
 @ObjectType()
 @Entity({ name: 'constructions' })
 export class Construction {
+  @Field()
   @PrimaryGeneratedColumn()
   id: number;
 
   @Field((type) => Float)
-  @IsNumber()
-  @IsPositive()
   @Column({ type: 'bigint' })
   area: number;
 
   @Field((type) => Int)
-  @IsNumber()
-  @IsPositive()
   @Column({ type: 'int' })
   floors: number;
 
   @Field()
-  @IsString()
   @Column({ type: 'varchar', length: 24 })
   type: string;
 
   @Field()
-  @IsString()
   @Column({ type: 'varchar', length: 128 })
   address: string;
 
