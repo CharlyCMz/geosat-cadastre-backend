@@ -11,5 +11,6 @@ import { LegalPersonResolver } from './resolvers/legal-person.resolver';
     NaturalPersonResolver,
     LegalPersonResolver,
   ],
+  exports: [LegalPersonService, NaturalPersonService],
 })
 export class OwnersModule {}
