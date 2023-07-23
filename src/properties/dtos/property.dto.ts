@@ -1,6 +1,12 @@
 import { Field, InputType, Int } from '@nestjs/graphql';
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { IsNotEmpty, IsNumber, IsPositive, IsString } from 'class-validator';
+import {
+  IsArray,
+  IsNotEmpty,
+  IsNumber,
+  IsPositive,
+  IsString,
+} from 'class-validator';
 
 @InputType()
 export class CreatePropertyDTO {
@@ -35,6 +41,18 @@ export class CreatePropertyDTO {
   @ApiProperty()
   @Field()
   readonly municipality: string;
+
+  @IsNotEmpty()
+  @IsPositive()
+  @ApiProperty()
+  @Field()
+  readonly landId: number;
+
+  @IsArray()
+  @IsNotEmpty()
+  @ApiProperty()
+  @Field()
+  readonly ownerIds: number[];
 }
 
 export class UpdatePropertyDTO extends PartialType(CreatePropertyDTO) {}

@@ -3,9 +3,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Land } from './land.entity';
 
 @ObjectType()
 @Entity({ name: 'constructions' })
@@ -30,7 +32,8 @@ export class Construction {
   @Column({ type: 'varchar', length: 128 })
   address: string;
 
-  //TODO: Relations to Land.
+  @ManyToOne(() => Land, (land) => land.constructions)
+  land: Land;
 
   @Field()
   @CreateDateColumn({

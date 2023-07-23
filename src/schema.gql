@@ -2,7 +2,25 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type NaturalPerson {
+  id: Int!
+  address: String!
+  eMail: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  documentType: String!
+  documentNumber: Int!
+  name: String!
+  lastName: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type LegalPerson {
+  id: Int!
   address: String!
   eMail: String!
   createdAt: DateTime!
@@ -11,11 +29,27 @@ type LegalPerson {
   businessName: String!
 }
 
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
-
 type Query {
-  legalPersons: [LegalPerson!]!
+  findAll: [LegalPerson!]!
+  findById(id: Int!): LegalPerson!
+}
+
+type Mutation {
+  createEntity(ownerInput: CreateLegalPersonDTO!): LegalPerson!
+  updateEntity(id: Float!, ownerInput: UpdateLegalPersonDTO!): LegalPerson!
+  deleteEntity(id: Float!): LegalPerson!
+}
+
+input CreateLegalPersonDTO {
+  address: String!
+  eMail: String!
+  nit: Int!
+  businessName: String!
+}
+
+input UpdateLegalPersonDTO {
+  address: String
+  eMail: String
+  nit: Int
+  businessName: String
 }

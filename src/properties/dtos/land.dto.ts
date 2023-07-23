@@ -2,6 +2,7 @@
 import { Field, Float, InputType, Int } from '@nestjs/graphql';
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import {
+  IsArray,
   IsBoolean,
   IsNotEmpty,
   IsNumber,
@@ -35,6 +36,12 @@ export class CreateLandDTO {
   @ApiProperty()
   @Field()
   readonly landType: string;
+
+  @IsArray()
+  @IsNotEmpty()
+  @ApiProperty()
+  @Field()
+  readonly constructionIds?: number[];
 }
 
 export class UpdateLandDTO extends PartialType(CreateLandDTO) {}

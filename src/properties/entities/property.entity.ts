@@ -1,12 +1,18 @@
-import { ObjectType, Field, Int, Float } from '@nestjs/graphql';
+import { ObjectType, Field, Int } from '@nestjs/graphql';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   Unique,
   UpdateDateColumn,
 } from 'typeorm';
+import { Land } from './land.entity';
+import { Owner } from 'src/owners/entities/owner.entity';
 
 @ObjectType()
 @Entity({ name: 'properties' })
@@ -36,7 +42,13 @@ export class Property {
   @Column({ type: 'varchar', length: 64 })
   municipality: string;
 
-  //TODO: Relations to Owners, Land and Constructions.
+  @OneToOne(() => Land, { nullable: false })
+  @JoinColumn()
+  land: Land;
+
+  @ManyToMany(() => Owner, (owner) => owner.properties)
+  @JoinTable()
+  owners: Owner[];
 
   @Field()
   @CreateDateColumn({

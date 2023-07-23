@@ -1,5 +1,5 @@
-import { Field, InputType, Int } from '@nestjs/graphql';
-import { ApiProperty, PartialType } from '@nestjs/swagger';
+import { Field, InputType, Int, PartialType } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsEmail,
   IsNotEmpty,
@@ -42,7 +42,7 @@ export class CreateNaturalPersonDTO {
   @ApiProperty()
   lastName: string;
 }
-
+@InputType()
 export class UpdateNaturalPersonDTO extends PartialType(
   CreateNaturalPersonDTO,
 ) {}

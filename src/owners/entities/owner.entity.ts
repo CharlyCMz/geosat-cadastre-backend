@@ -1,9 +1,11 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { Property } from 'src/properties/entities/property.entity';
 import {
   BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
+  ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -23,7 +25,8 @@ export abstract class Owner extends BaseEntity {
   @Column({ name: 'e_mail', type: 'varchar', length: 64 })
   eMail: string;
 
-  //TODO: Relations to Properties, Natural Person and Legal Person|.
+  @ManyToMany(() => Property, (property) => property.owners)
+  properties: Property[];
 
   @Field()
   @CreateDateColumn({

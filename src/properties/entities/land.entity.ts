@@ -1,12 +1,13 @@
 import { ObjectType, Field, Float } from '@nestjs/graphql';
-import { IsBoolean, IsNumber, IsPositive, IsString } from 'class-validator';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Construction } from './construction.entity';
 
 @ObjectType()
 @Entity({ name: 'lands' })
@@ -27,11 +28,11 @@ export class Land {
   waterBodies: boolean;
 
   @Field()
-  @IsString()
   @Column({ name: 'land_type', type: 'varchar', length: 24 })
   landType: string;
 
-  //TODO: Relations to Properties and Constructions.
+  @OneToMany(() => Construction, (construction) => construction.land)
+  constructions: Construction[];
 
   @Field()
   @CreateDateColumn({

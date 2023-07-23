@@ -29,6 +29,12 @@ export class CreateConstructionDTO {
   @ApiProperty()
   @Field()
   readonly address: string;
+
+  @IsNotEmpty()
+  @IsPositive()
+  @ApiProperty()
+  @Field()
+  readonly landId: number;
 }
 
 export class UpdateConstructionDTO extends PartialType(CreateConstructionDTO) {}

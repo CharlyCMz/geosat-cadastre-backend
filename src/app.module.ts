@@ -11,6 +11,9 @@ import { ConfigModule } from '@nestjs/config';
 import { environments } from './environments';
 import config from './config';
 import * as Joi from 'joi';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Owner } from './owners/entities/owner.entity';
+import { Property } from './properties/entities/property.entity';
 
 @Module({
   imports: [
@@ -31,6 +34,7 @@ import * as Joi from 'joi';
         POSTGRES_HOST: Joi.string().required(),
       }),
     }),
+    TypeOrmModule.forFeature([Owner, Property]),
     OwnersModule,
     PropertiesModule,
     DatabaseModule,

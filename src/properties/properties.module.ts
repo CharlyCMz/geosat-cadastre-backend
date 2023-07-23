@@ -10,6 +10,8 @@ import { Construction } from './entities/construction.entity';
 import { Land } from './entities/land.entity';
 import { Property } from './entities/property.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { LegalPerson } from 'src/owners/entities/legal-person.entity';
+import { NaturalPerson } from 'src/owners/entities/natural-person.entity';
 
 @Module({
   imports: [
@@ -23,6 +25,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     PropertyResolver,
     LandResolver,
     ConstructionResolver,
+    LegalPerson,
+    NaturalPerson,
   ],
 })
 export class PropertiesModule {}
