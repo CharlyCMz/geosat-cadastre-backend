@@ -6,7 +6,6 @@ import { LegalPersonResolver } from './resolvers/legal-person.resolver';
 import { LegalPerson } from './entities/legal-person.entity';
 import { NaturalPerson } from './entities/natural-person.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Owner } from './entities/owner.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([LegalPerson, NaturalPerson])],

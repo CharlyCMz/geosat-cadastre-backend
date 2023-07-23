@@ -3,7 +3,7 @@ import { LandService } from '../services/land.service';
 import { Land } from '../entities/land.entity';
 import { CreateLandDTO, UpdateLandDTO } from '../dtos/land.dto';
 
-@Resolver('land')
+@Resolver()
 export class LandResolver {
   constructor(private landService: LandService) {}
 

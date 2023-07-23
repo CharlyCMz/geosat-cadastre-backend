@@ -3,7 +3,7 @@ import { PropertyService } from '../services/property.service';
 import { Property } from '../entities/property.entity';
 import { CreatePropertyDTO, UpdatePropertyDTO } from '../dtos/property.dto';
 
-@Resolver('property')
+@Resolver()
 export class PropertyResolver {
   constructor(private propertyService: PropertyService) {}
 

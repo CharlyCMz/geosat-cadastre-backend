@@ -6,7 +6,7 @@ import {
   UpdateLegalPersonDTO,
 } from '../dtos/legal-person.dto';
 
-@Resolver('legal_person')
+@Resolver()
 export class LegalPersonResolver {
   constructor(private legalPersonService: LegalPersonService) {}
 

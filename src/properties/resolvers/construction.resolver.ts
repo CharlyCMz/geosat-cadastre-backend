@@ -6,7 +6,7 @@ import {
   UpdateConstructionDTO,
 } from '../dtos/construction.dto';
 
-@Resolver('construction')
+@Resolver()
 export class ConstructionResolver {
   constructor(private constructionService: ConstructionService) {}
 
