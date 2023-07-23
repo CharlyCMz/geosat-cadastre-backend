@@ -3,11 +3,12 @@
 # ------------------------------------------------------
 
 type Construction {
-  id: Float!
+  id: Int!
   area: Float!
   floors: Int!
   type: String!
   address: String!
+  land: Land!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -18,10 +19,12 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 scalar DateTime
 
 type Land {
+  id: Int!
   area: Float!
   comercialValue: Float!
   waterBodies: Boolean!
   landType: String!
+  constructions: [Construction!]!
   createdAt: DateTime!
   updatedAt: DateTime!
 }
@@ -97,6 +100,7 @@ input CreatePropertyDTO {
   state: String!
   municipality: String!
   landId: Float!
+  ownerType: String!
   ownerIds: [ID!]!
 }
 
@@ -107,6 +111,7 @@ input UpdatePropertyDTO {
   state: String
   municipality: String
   landId: Float
+  ownerType: String
   ownerIds: [ID!]
 }
 
@@ -115,7 +120,7 @@ input CreateLandDTO {
   comercialValue: Int!
   waterBodies: Boolean!
   landType: String!
-  constructionIds: [ID!]!
+  constructionIds: [ID!]
 }
 
 input UpdateLandDTO {

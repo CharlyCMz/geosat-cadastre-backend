@@ -46,7 +46,7 @@ export class Property {
   @JoinColumn()
   land: Land;
 
-  @ManyToMany(() => Owner, (owner) => owner.properties)
+  @ManyToMany(() => Owner, (owner) => owner.properties, { cascade: true })
   @JoinTable()
   owners: Owner[];
 

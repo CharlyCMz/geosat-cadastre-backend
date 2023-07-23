@@ -26,13 +26,19 @@ export class LegalPersonService {
   async findOneById(id: number): Promise<LegalPerson> {
     const owner = await this.legalPersonRepository
       .createQueryBuilder('legal_people')
-      //.leftJoinAndSelect('legal_people.properties', 'properties')
       .where('legal_people.id = :id', { id })
       .getOne();
     if (!owner) {
       throw new NotFoundException(`The Owner with ID: ${id} was Not Found`);
     }
     return owner;
+  }
+
+  async filterByIds(list: number[]): Promise<LegalPerson[]> {
+    return await this.legalPersonRepository
+      .createQueryBuilder('legal_people')
+      .where('legal_people.id IN (:...list)', { list })
+      .getMany();
   }
 
   async createEntity(owner: CreateLegalPersonDTO): Promise<LegalPerson> {

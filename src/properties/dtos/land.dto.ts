@@ -6,6 +6,7 @@ import {
   IsBoolean,
   IsNotEmpty,
   IsNumber,
+  IsOptional,
   IsPositive,
   IsString,
 } from 'class-validator';
@@ -38,9 +39,9 @@ export class CreateLandDTO {
   readonly landType: string;
 
   @IsArray()
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty()
-  @Field(() => [ID])
+  @Field(() => [ID], { nullable: true })
   readonly constructionIds?: number[];
 }
 

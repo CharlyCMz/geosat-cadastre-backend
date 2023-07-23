@@ -12,7 +12,7 @@ import { Land } from './land.entity';
 @ObjectType()
 @Entity({ name: 'constructions' })
 export class Construction {
-  @Field()
+  @Field((type) => Int)
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -32,6 +32,7 @@ export class Construction {
   @Column({ type: 'varchar', length: 128 })
   address: string;
 
+  @Field(() => Land)
   @ManyToOne(() => Land, (land) => land.constructions)
   land: Land;
 

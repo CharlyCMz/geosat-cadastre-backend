@@ -7,6 +7,9 @@ import {
 import { InjectRepository } from '@nestjs/typeorm';
 import { Property } from '../entities/property.entity';
 import { QueryFailedError, Repository } from 'typeorm';
+import { NaturalPersonService } from 'src/owners/services/natural-person.service';
+import { LegalPersonService } from 'src/owners/services/legal-person.service';
+import { LandService } from './land.service';
 import { CreatePropertyDTO, UpdatePropertyDTO } from '../dtos/property.dto';
 
 @Injectable()
@@ -14,6 +17,9 @@ export class PropertyService {
   constructor(
     @InjectRepository(Property)
     private propertyRepository: Repository<Property>,
+    private landService: LandService,
+    private naturalPersonService: NaturalPersonService,
+    private legalPersonService: LegalPersonService,
   ) {}
 
   async findAll() {
@@ -34,9 +40,19 @@ export class PropertyService {
 
   async createEntity(property: CreatePropertyDTO): Promise<Property> {
     try {
+      let owners;
+      if (property.ownerType === 'Natural') {
+        owners = await this.naturalPersonService.filterByIds(property.ownerIds);
+      } else if (property.ownerType === 'Legal') {
+        owners = await this.legalPersonService.filterByIds(property.ownerIds);
+      }
+      const land = await this.landService.findOneById(property.landId);
       const newProperty = this.propertyRepository.create(property);
+      newProperty.land = land;
+      newProperty.owners = owners;
       return await this.propertyRepository.save(newProperty);
     } catch (error) {
+      console.log(error);
       if (error instanceof QueryFailedError) {
         throw new HttpException(
           'Property  already exist',

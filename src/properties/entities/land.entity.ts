@@ -1,4 +1,4 @@
-import { ObjectType, Field, Float } from '@nestjs/graphql';
+import { ObjectType, Field, Float, Int } from '@nestjs/graphql';
 import {
   Column,
   CreateDateColumn,
@@ -12,6 +12,7 @@ import { Construction } from './construction.entity';
 @ObjectType()
 @Entity({ name: 'lands' })
 export class Land {
+  @Field((type) => Int)
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -31,8 +32,9 @@ export class Land {
   @Column({ name: 'land_type', type: 'varchar', length: 24 })
   landType: string;
 
+  @Field(() => [Construction])
   @OneToMany(() => Construction, (construction) => construction.land)
-  constructions: Construction[];
+  constructions?: Construction[];
 
   @Field()
   @CreateDateColumn({

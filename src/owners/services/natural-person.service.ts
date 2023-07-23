@@ -35,6 +35,13 @@ export class NaturalPersonService {
     return owner;
   }
 
+  async filterByIds(list: number[]): Promise<NaturalPerson[]> {
+    return await this.naturalPersonRepository
+      .createQueryBuilder('natural_people')
+      .where('natural_people.id IN (:...list)', { list })
+      .getMany();
+  }
+
   async createEntity(owner: CreateNaturalPersonDTO): Promise<NaturalPerson> {
     try {
       const newOwner = this.naturalPersonRepository.create(owner);

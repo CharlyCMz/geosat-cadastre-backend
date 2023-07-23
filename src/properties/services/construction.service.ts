@@ -1,22 +1,19 @@
-import {
-  HttpException,
-  HttpStatus,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Construction } from '../entities/construction.entity';
-import { QueryFailedError, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import {
   CreateConstructionDTO,
   UpdateConstructionDTO,
 } from '../dtos/construction.dto';
+import { LandService } from './land.service';
 
 @Injectable()
 export class ConstructionService {
   constructor(
     @InjectRepository(Construction)
     private constructionRepository: Repository<Construction>,
+    private landService: LandService,
   ) {}
 
   async findAll() {
@@ -41,15 +38,11 @@ export class ConstructionService {
     construction: CreateConstructionDTO,
   ): Promise<Construction> {
     try {
+      const land = await this.landService.findOneById(construction.landId);
       const newConstruction = this.constructionRepository.create(construction);
+      newConstruction.land = land;
       return await this.constructionRepository.save(newConstruction);
     } catch (error) {
-      if (error instanceof QueryFailedError) {
-        throw new HttpException(
-          'Construction  already exist',
-          HttpStatus.BAD_REQUEST,
-        );
-      }
       throw error;
     }
   }

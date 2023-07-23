@@ -47,6 +47,11 @@ export class CreatePropertyDTO {
   @Field()
   readonly landId: number;
 
+  @IsNotEmpty()
+  @IsString()
+  @Field()
+  readonly ownerType: string;
+
   @IsArray()
   @IsNotEmpty()
   @ApiProperty()
