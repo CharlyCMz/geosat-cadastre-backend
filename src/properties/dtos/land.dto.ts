@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Field, Float, InputType, Int } from '@nestjs/graphql';
-import { ApiProperty, PartialType } from '@nestjs/swagger';
+import { Field, Float, ID, InputType, Int, PartialType } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsArray,
   IsBoolean,
@@ -40,8 +40,9 @@ export class CreateLandDTO {
   @IsArray()
   @IsNotEmpty()
   @ApiProperty()
-  @Field()
+  @Field(() => [ID])
   readonly constructionIds?: number[];
 }
 
+@InputType()
 export class UpdateLandDTO extends PartialType(CreateLandDTO) {}

@@ -1,5 +1,5 @@
-import { Field, InputType, Int } from '@nestjs/graphql';
-import { ApiProperty, PartialType } from '@nestjs/swagger';
+import { Field, ID, InputType, Int, PartialType } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsArray,
   IsNotEmpty,
@@ -43,7 +43,6 @@ export class CreatePropertyDTO {
   readonly municipality: string;
 
   @IsNotEmpty()
-  @IsPositive()
   @ApiProperty()
   @Field()
   readonly landId: number;
@@ -51,8 +50,9 @@ export class CreatePropertyDTO {
   @IsArray()
   @IsNotEmpty()
   @ApiProperty()
-  @Field()
+  @Field(() => [ID])
   readonly ownerIds: number[];
 }
 
+@InputType()
 export class UpdatePropertyDTO extends PartialType(CreatePropertyDTO) {}

@@ -11,7 +11,7 @@ import {
 } from 'typeorm';
 
 @ObjectType()
-@Entity()
+@Entity({ name: 'owners' })
 export abstract class Owner extends BaseEntity {
   @Field((type) => Int)
   @PrimaryGeneratedColumn()

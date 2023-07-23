@@ -1,5 +1,5 @@
-import { Field, Float, InputType, Int } from '@nestjs/graphql';
-import { ApiProperty, PartialType } from '@nestjs/swagger';
+import { Field, Float, InputType, Int, PartialType } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsNumber, IsPositive, IsString } from 'class-validator';
 
 @InputType()
@@ -37,4 +37,5 @@ export class CreateConstructionDTO {
   readonly landId: number;
 }
 
+@InputType()
 export class UpdateConstructionDTO extends PartialType(CreateConstructionDTO) {}
