@@ -60,14 +60,104 @@ type LegalPerson {
 }
 
 type Query {
-  findAll: [LegalPerson!]!
-  findById(id: Int!): LegalPerson!
+  findAllProperties: [Property!]!
+  findPropertyById(id: Int!): Property!
+  findAllLands: [Land!]!
+  findLandById(id: Int!): Land!
+  findAllConstructions: [Construction!]!
+  findConstructionById(id: Int!): Construction!
+  findAllNaturalPerson: [NaturalPerson!]!
+  findNaturalPersonById(id: Int!): NaturalPerson!
+  findAllLegalPerson: [LegalPerson!]!
+  findLegalPersonById(id: Int!): LegalPerson!
 }
 
 type Mutation {
-  createEntity(ownerInput: CreateLegalPersonDTO!): LegalPerson!
-  updateEntity(id: Float!, ownerInput: UpdateLegalPersonDTO!): LegalPerson!
-  deleteEntity(id: Float!): LegalPerson!
+  createProperty(propertyInput: CreatePropertyDTO!): Property!
+  updateProperty(id: Float!, propertyInput: UpdatePropertyDTO!): Property!
+  deleteProperty(id: Float!): Property!
+  createLand(landInput: CreateLandDTO!): Land!
+  updateLand(id: Float!, landInput: UpdateLandDTO!): Land!
+  deleteLand(id: Float!): Land!
+  createConstruction(constructionInput: CreateConstructionDTO!): Construction!
+  updateConstruction(id: Float!, constructionInput: UpdateConstructionDTO!): Construction!
+  deleteConstruction(id: Float!): Construction!
+  createNaturalPerson(ownerInput: CreateNaturalPersonDTO!): NaturalPerson!
+  updateNaturalPerson(id: Float!, ownerInput: UpdateNaturalPersonDTO!): NaturalPerson!
+  deleteNaturalPerson(id: Float!): NaturalPerson!
+  createLegalPerson(ownerInput: CreateLegalPersonDTO!): LegalPerson!
+  updateLegalPerson(id: Float!, ownerInput: UpdateLegalPersonDTO!): LegalPerson!
+  deleteLegalPerson(id: Float!): LegalPerson!
+}
+
+input CreatePropertyDTO {
+  predialNumber: Int!
+  appraise: Int!
+  name: String!
+  state: String!
+  municipality: String!
+  landId: Float!
+  ownerIds: [ID!]!
+}
+
+input UpdatePropertyDTO {
+  predialNumber: Int
+  appraise: Int
+  name: String
+  state: String
+  municipality: String
+  landId: Float
+  ownerIds: [ID!]
+}
+
+input CreateLandDTO {
+  area: Float!
+  comercialValue: Int!
+  waterBodies: Boolean!
+  landType: String!
+  constructionIds: [ID!]!
+}
+
+input UpdateLandDTO {
+  area: Float
+  comercialValue: Int
+  waterBodies: Boolean
+  landType: String
+  constructionIds: [ID!]
+}
+
+input CreateConstructionDTO {
+  area: Float!
+  floors: Int!
+  type: String!
+  address: String!
+  landId: Float!
+}
+
+input UpdateConstructionDTO {
+  area: Float
+  floors: Int
+  type: String
+  address: String
+  landId: Float
+}
+
+input CreateNaturalPersonDTO {
+  address: String!
+  eMail: String!
+  documentType: String!
+  documentNumber: Int!
+  name: String!
+  lastName: String!
+}
+
+input UpdateNaturalPersonDTO {
+  address: String
+  eMail: String
+  documentType: String
+  documentNumber: Int
+  name: String
+  lastName: String
 }
 
 input CreateLegalPersonDTO {

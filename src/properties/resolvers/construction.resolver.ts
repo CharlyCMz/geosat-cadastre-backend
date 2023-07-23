@@ -6,27 +6,29 @@ import {
   UpdateConstructionDTO,
 } from '../dtos/construction.dto';
 
-@Resolver()
+@Resolver(() => Construction)
 export class ConstructionResolver {
   constructor(private constructionService: ConstructionService) {}
 
   @Query(() => [Construction])
-  findAll() {
+  findAllConstructions() {
     return this.constructionService.findAll();
   }
 
   @Query(() => Construction)
-  findById(@Args('id', { type: () => Int }) id: number) {
+  findConstructionById(@Args('id', { type: () => Int }) id: number) {
     return this.constructionService.findOneById(id);
   }
 
   @Mutation(() => Construction)
-  createEntity(@Args('constructionInput') payload: CreateConstructionDTO) {
+  createConstruction(
+    @Args('constructionInput') payload: CreateConstructionDTO,
+  ) {
     return this.constructionService.createEntity(payload);
   }
 
   @Mutation(() => Construction)
-  updateEntity(
+  updateConstruction(
     @Args('id') id: number,
     @Args('constructionInput') payload: UpdateConstructionDTO,
   ) {
@@ -34,7 +36,7 @@ export class ConstructionResolver {
   }
 
   @Mutation(() => Construction)
-  deleteEntity(@Args('id') id: number) {
+  deleteConstruction(@Args('id') id: number) {
     return this.constructionService.deleteEntity(id);
   }
 }

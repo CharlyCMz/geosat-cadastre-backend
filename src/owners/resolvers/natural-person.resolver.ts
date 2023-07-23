@@ -6,27 +6,27 @@ import {
   UpdateNaturalPersonDTO,
 } from '../dtos/natural-person.dto';
 
-@Resolver()
+@Resolver(() => NaturalPerson)
 export class NaturalPersonResolver {
   constructor(private naturalPersonService: NaturalPersonService) {}
 
   @Query(() => [NaturalPerson])
-  findAll() {
+  findAllNaturalPerson() {
     return this.naturalPersonService.findAll();
   }
 
   @Query(() => NaturalPerson)
-  findById(@Args('id', { type: () => Int }) id: number) {
+  findNaturalPersonById(@Args('id', { type: () => Int }) id: number) {
     return this.naturalPersonService.findOneById(id);
   }
 
   @Mutation(() => NaturalPerson)
-  createEntity(@Args('ownerInput') payload: CreateNaturalPersonDTO) {
+  createNaturalPerson(@Args('ownerInput') payload: CreateNaturalPersonDTO) {
     return this.naturalPersonService.createEntity(payload);
   }
 
   @Mutation(() => NaturalPerson)
-  updateEntity(
+  updateNaturalPerson(
     @Args('id') id: number,
     @Args('ownerInput') payload: UpdateNaturalPersonDTO,
   ) {
@@ -34,7 +34,7 @@ export class NaturalPersonResolver {
   }
 
   @Mutation(() => NaturalPerson)
-  deleteEntity(@Args('id') id: number) {
+  deleteNaturalPerson(@Args('id') id: number) {
     return this.naturalPersonService.deleteEntity(id);
   }
 }

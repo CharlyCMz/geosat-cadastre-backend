@@ -3,27 +3,27 @@ import { LandService } from '../services/land.service';
 import { Land } from '../entities/land.entity';
 import { CreateLandDTO, UpdateLandDTO } from '../dtos/land.dto';
 
-@Resolver()
+@Resolver(() => Land)
 export class LandResolver {
   constructor(private landService: LandService) {}
 
   @Query(() => [Land])
-  findAll() {
+  findAllLands() {
     return this.landService.findAll();
   }
 
   @Query(() => Land)
-  findById(@Args('id', { type: () => Int }) id: number) {
+  findLandById(@Args('id', { type: () => Int }) id: number) {
     return this.landService.findOneById(id);
   }
 
   @Mutation(() => Land)
-  createEntity(@Args('landInput') payload: CreateLandDTO) {
+  createLand(@Args('landInput') payload: CreateLandDTO) {
     return this.landService.createEntity(payload);
   }
 
   @Mutation(() => Land)
-  updateEntity(
+  updateLand(
     @Args('id') id: number,
     @Args('landInput') payload: UpdateLandDTO,
   ) {
@@ -31,7 +31,7 @@ export class LandResolver {
   }
 
   @Mutation(() => Land)
-  deleteEntity(@Args('id') id: number) {
+  deleteLand(@Args('id') id: number) {
     return this.landService.deleteEntity(id);
   }
 }
