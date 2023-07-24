@@ -1,4 +1,4 @@
-import { Field, ID, InputType, Int, PartialType } from '@nestjs/graphql';
+import { Field, Float, ID, InputType, Int, PartialType } from '@nestjs/graphql';
 import { ApiProperty } from '@nestjs/swagger';
 import {
   IsArray,
@@ -21,7 +21,7 @@ export class CreatePropertyDTO {
   @IsPositive()
   @IsNumber()
   @ApiProperty()
-  @Field((type) => Int)
+  @Field((type) => Float)
   readonly appraise: number;
 
   @IsNotEmpty()

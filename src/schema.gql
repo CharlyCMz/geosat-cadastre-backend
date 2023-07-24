@@ -95,7 +95,7 @@ type Mutation {
 
 input CreatePropertyDTO {
   predialNumber: Int!
-  appraise: Int!
+  appraise: Float!
   name: String!
   state: String!
   municipality: String!
@@ -106,7 +106,7 @@ input CreatePropertyDTO {
 
 input UpdatePropertyDTO {
   predialNumber: Int
-  appraise: Int
+  appraise: Float
   name: String
   state: String
   municipality: String

@@ -1,4 +1,4 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { ObjectType, Field, Int, Float } from '@nestjs/graphql';
 import {
   Column,
   CreateDateColumn,
@@ -26,7 +26,7 @@ export class Property {
   @Column({ name: 'predial_number', type: 'bigint' })
   predialNumber: number;
 
-  @Field()
+  @Field((type) => Float)
   @Column({ type: 'money' })
   appraise: number;
 
